@@ -1,4 +1,11 @@
 <div>
-  <app-contact-form (formSubmit)="addContact($event)"></app-contact-form>
-  <app-contact-table  [contacts]="contacts"></app-contact-table>
+  <app-contact-form
+    [contact]="contact"
+    (formSubmit)="addContact($event)"
+  ></app-contact-form>
+  <app-contact-table
+    [contacts]="contacts"
+    (contact)="populateDate($event)"
+    (contactDelete)="deleteContact($event)"
+  ></app-contact-table>
 </div>
