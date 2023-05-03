@@ -20,7 +20,7 @@ import { Contact } from '../../shared/contacts.type';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.css'],
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent {
   contactForm: FormGroup;
 
   isUpdate = false;
@@ -53,21 +53,6 @@ export class ContactFormComponent implements OnInit {
         Validators.email,
       ]),
       contact: new FormControl(contactFormData?.contact, [
-        Validators.required,
-        Validators.pattern('^[0-9]{11}$'),
-      ]),
-    });
-  }
-
-  ngOnInit(): void {
-    this.contactForm = this.formBuilder.group({
-      id: this.contactData?.id,
-      name: new FormControl(this.contactData?.name, Validators.required),
-      email: new FormControl(this.contactData?.email, [
-        Validators.required,
-        Validators.email,
-      ]),
-      contact: new FormControl(this.contactData?.contact, [
         Validators.required,
         Validators.pattern('^[0-9]{11}$'),
       ]),
