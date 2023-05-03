@@ -26,9 +26,10 @@ export class ContactFormComponent implements OnInit {
     private contactService: ContactService
   ) {
     this.contactForm = this.formBuilder.group({
-      name: new FormControl (null,Validators.required),
-      email: new FormControl (null, [Validators.required, Validators.email]),
-      contact: new FormControl (null, [Validators.required,
+      name: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      contact: new FormControl(null, [
+        Validators.required,
         Validators.pattern('^[0-9]{11}$'),
       ]),
     });
@@ -39,15 +40,15 @@ export class ContactFormComponent implements OnInit {
       if (data) {
         this.contactForm = this.formBuilder.group({
           id: data.id,
-          name: [data.name, Validators.required],
-          email: [data.email, [
+          name: new FormControl(data.name, Validators.required),
+          email: new FormControl(data.email, [
             Validators.required,
             Validators.email,
-          ]],
-          contact: [data.contact, [
+          ]),
+          contact: new FormControl(data.contact, [
             Validators.required,
             Validators.pattern('^[0-9]{11}$'),
-          ]],
+          ]),
         });
       }
     });
