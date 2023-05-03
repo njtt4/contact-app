@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,7 +14,6 @@ import {
 } from '@angular/forms';
 
 import { Contact } from '../../shared/contacts.type';
-import { ContactService } from '../../shared/contact.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -19,12 +25,13 @@ export class ContactFormComponent implements OnInit {
 
   isUpdate = false;
 
+  @Input() contact: Contact | undefined;
+
   @Output() formSubmit = new EventEmitter<Contact>();
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private contactService: ContactService
-  ) {
+  contactData: Contact | undefined = undefined;
+
+  constructor(private formBuilder: FormBuilder) {
     this.contactForm = this.formBuilder.group({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -35,28 +42,35 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.contactService.getData().subscribe((data) => {
-      if (data) {
-        this.contactForm = this.formBuilder.group({
-          id: data.id,
-          name: new FormControl(data.name, Validators.required),
-          email: new FormControl(data.email, [
-            Validators.required,
-            Validators.email,
-          ]),
-          contact: new FormControl(data.contact, [
-            Validators.required,
-            Validators.pattern('^[0-9]{11}$'),
-          ]),
-        });
-      }
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    const contactFormData = changes['contact'].currentValue;
 
-    this.contactService.getIsUpdate().subscribe((data) => {
-      if (data) {
-        this.isUpdate = data;
-      }
+    this.contactForm = this.formBuilder.group({
+      id: contactFormData?.id,
+      name: new FormControl(contactFormData?.name, Validators.required),
+      email: new FormControl(contactFormData?.email, [
+        Validators.required,
+        Validators.email,
+      ]),
+      contact: new FormControl(contactFormData?.contact, [
+        Validators.required,
+        Validators.pattern('^[0-9]{11}$'),
+      ]),
+    });
+  }
+
+  ngOnInit(): void {
+    this.contactForm = this.formBuilder.group({
+      id: this.contactData?.id,
+      name: new FormControl(this.contactData?.name, Validators.required),
+      email: new FormControl(this.contactData?.email, [
+        Validators.required,
+        Validators.email,
+      ]),
+      contact: new FormControl(this.contactData?.contact, [
+        Validators.required,
+        Validators.pattern('^[0-9]{11}$'),
+      ]),
     });
   }
 

@@ -10,6 +10,7 @@ import { ContactService } from '../shared/contact.service';
 })
 export class ContactComponent implements OnInit {
   contacts: Contact[] = [];
+  contact: Contact | undefined = undefined;
 
   constructor(private contactService: ContactService) {}
 
@@ -25,8 +26,7 @@ export class ContactComponent implements OnInit {
   }
 
   populateDate(contact: Contact) {
-    this.contactService.setData(contact);
-    // this.contactService.setIsUpdate(true);
+    this.contact = contact;
   }
 
   deleteContact(contact: Contact) {
