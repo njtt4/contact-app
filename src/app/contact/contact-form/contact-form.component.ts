@@ -26,10 +26,7 @@ export class ContactFormComponent {
   isUpdate = false;
 
   @Input() contact: Contact | undefined;
-
   @Output() formSubmit = new EventEmitter<Contact>();
-
-  contactData: Contact | undefined = undefined;
 
   constructor(private formBuilder: FormBuilder) {
     this.contactForm = this.formBuilder.group({
@@ -44,6 +41,8 @@ export class ContactFormComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     const contactFormData = changes['contact'].currentValue;
+
+    this.isUpdate = true;
 
     this.contactForm = this.formBuilder.group({
       id: contactFormData?.id,
