@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { ContactService } from '../../shared/contact.service';
@@ -11,12 +18,14 @@ import { Contact } from '../../shared/contacts.type';
 })
 export class ContactTableComponent implements OnChanges {
   @Input() contacts: Contact[] = [];
+  @Output() contact = new EventEmitter<Contact>();
+  @Output() contactDelete = new EventEmitter<Contact>();
 
   dataSource = new MatTableDataSource<Contact>();
 
   displayedColumns: string[] = ['id', 'name', 'email', 'contact', 'actions'];
 
-  constructor(private contactService: ContactService) {}
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['contacts'] && changes['contacts'].currentValue) {
@@ -25,11 +34,10 @@ export class ContactTableComponent implements OnChanges {
   }
 
   deleteContact(item: Contact) {
-    this.contactService.deleteContact(item);
+    this.contactDelete.emit(item);
   }
 
   populateContactData(item: Contact) {
-    this.contactService.setData(item);
-    this.contactService.setIsUpdate(true);
+    this.contact.emit(item);
   }
 }

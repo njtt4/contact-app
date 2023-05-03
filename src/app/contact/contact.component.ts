@@ -11,8 +11,7 @@ import { ContactService } from '../shared/contact.service';
 export class ContactComponent implements OnInit {
   contacts: Contact[] = [];
 
-  constructor(private contactService: ContactService) {
-  }
+  constructor(private contactService: ContactService) {}
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((data) => {
@@ -23,5 +22,14 @@ export class ContactComponent implements OnInit {
   addContact(contact: Contact) {
     this.contactService.upsertContact(contact);
     this.contacts.push(contact);
+  }
+
+  populateDate(contact: Contact) {
+    this.contactService.setData(contact);
+    // this.contactService.setIsUpdate(true);
+  }
+
+  deleteContact(contact: Contact) {
+    this.contactService.deleteContact(contact);
   }
 }
