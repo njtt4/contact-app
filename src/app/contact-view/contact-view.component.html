@@ -1,0 +1,23 @@
+<div class="card-container">
+  <mat-card *ngIf="contact; else noContactDetail">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title class="contact-view-title">{{
+        contact.name
+      }}</mat-card-title>
+      <mat-card-subtitle>Id: {{ contact.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="contact-view-text">Email : {{ contact.email }}</p>
+      <p class="contact-view-text">Contact : {{ contact.contact }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<button class="button" routerLink="..">
+  <span class="material-symbols-outlined"> arrow_back </span>Back
+</button>
+
+<div class="card-container"></div>
+<ng-template #noContactDetail>
+  <div>No contact details to display</div>
+</ng-template>

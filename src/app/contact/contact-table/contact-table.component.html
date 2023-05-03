@@ -1,0 +1,60 @@
+<div class="table-container">
+  <mat-card>
+    <table class="list" mat-table [dataSource]="dataSource" matSort>
+      <!--- Define the columns -->
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact">
+        <th mat-header-cell *matHeaderCellDef>Contact</th>
+        <td mat-cell *matCellDef="let element">{{ element.contact }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-button
+            [routerLink]="['/contacts', element.id]"
+            aria-label="view"
+          >
+            <span class="material-symbols-outlined">
+              visibility
+            </span>
+          </button>
+          <button
+            mat-button
+            (click)="populateContactData(element)"
+            aria-label="edit"
+          >
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+          <button
+            mat-button
+            (click)="deleteContact(element)"
+            aria-label="delete"
+          >
+            <span class="material-symbols-outlined"> delete </span>
+          </button>
+        </td>
+      </ng-container>
+
+      <!--- Define the table rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card>
+</div>

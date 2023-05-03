@@ -1,0 +1,31 @@
+.contact-view-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.contact-view-text {
+  font-size: 20px;
+}
+
+.header-image {
+  background-image: url("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+  background-size: cover;
+}
+
+.card-container {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 300px;
+  height: 300px;
+}

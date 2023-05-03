@@ -1,0 +1,30 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 30%;
+}
+
+.button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.form-container {
+  margin-left: 20px;
+}
+
+.mybutton {
+  background-color: #6096b4;
+  color: #fff;
+}
+h1 {
+  margin-left: 20px;
+}
+
+.form-details {
+  margin-bottom: 25px
+}

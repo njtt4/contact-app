@@ -1,0 +1,87 @@
+<h1>Contact Details</h1>
+
+<div class="form-container">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form-details">
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input
+          name="myInput"
+          type="text"
+          matInput
+          formControlName="name"
+          placeholder="Ex. James Bond"
+        /><mat-icon matSuffix>person</mat-icon>
+        <mat-error
+          *ngIf="
+            !contactForm.controls['name'].hasError('required')
+          "
+        >
+          Please enter a valid name.
+        </mat-error>
+        <mat-error *ngIf="contactForm.controls['name'].hasError('required')">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-details">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          name="myInput"
+          type="email"
+          matInput
+          formControlName="email"
+          placeholder="Ex. test@example.com"
+        /><mat-icon matSuffix>email</mat-icon>
+        <mat-error
+          *ngIf="
+            contactForm.controls['email'].hasError('email') &&
+            !contactForm.controls['email'].hasError('required')
+          "
+        >
+          Please enter a valid email address.
+        </mat-error>
+        <mat-error *ngIf="contactForm.controls['email'].hasError('required')">
+          Email address is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-details">
+      <mat-form-field class="example-full-width">
+        <mat-label>Contact</mat-label>
+        <input
+          name="myInput"
+          type="text"
+          matInput
+          formControlName="contact"
+          placeholder="Ex. 09123456789"
+        /><mat-icon matSuffix>phone</mat-icon>
+        <mat-error
+          *ngIf="
+            contactForm.controls['contact'].hasError('pattern') &&
+            !contactForm.controls['contact'].hasError('required')
+          "
+        >
+          Please enter a valid contact number.
+        </mat-error>
+        <mat-error *ngIf="contactForm.controls['contact'].hasError('required')">
+          Contact number is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="button-row">
+      <button
+        class="mybutton"
+        type="button"
+        (click)="onSubmit()"
+        [disabled]="!contactForm.valid"
+        aria-label="add or update button"
+      >
+        {{ isUpdate ? "Update" : "Add" }}
+      </button>
+    </div>
+  </form>
+</div>
